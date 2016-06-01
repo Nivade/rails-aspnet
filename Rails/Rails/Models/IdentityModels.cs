@@ -67,6 +67,7 @@ namespace Rails.Models
         }
 
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Tram> Trams { get; set; }
 
 
         public System.Data.Entity.DbSet<Rails.Models.RolePermission> RolePermissions { get; set; }

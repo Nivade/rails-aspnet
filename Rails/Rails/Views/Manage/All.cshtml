@@ -7,7 +7,7 @@
 <h2>Here you will find every registered Rails user account.</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Register", "Account", new { signin = false })
+    @Html.RouteLink("Create New", new {  controller = "Account", action = "Register" });
 </p>
 <div class="container">
     <div class="row">
