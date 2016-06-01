@@ -13,6 +13,8 @@ namespace Rails.Models
         [Column(Order = 1)]
         public string RoleId { get; set; }
 
+        public virtual IdentityRole Role { get; set; }
+
         [Key]
         [Column(Order = 2)]
         public int PermissionId { get; set; }
