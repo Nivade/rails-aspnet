@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -18,6 +19,11 @@ namespace Rails.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        [Required]
+        public int FunctieId { get; set; }
+
+        public virtual Functie Functie { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -50,6 +56,8 @@ namespace Rails.Models
             modelBuilder.Entity<IdentityUserClaim>().ToTable("AspNetUserClaims", "DBI346087");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("AspNetUserLogins", "DBI346087");
         }
+
+        public DbSet<Functie> Functies { get; set; }
 
     }
 }
