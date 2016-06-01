@@ -142,11 +142,6 @@ namespace Rails.Controllers
         {
             ViewBag.Name = new SelectList(db.Roles.ToList(), "Name", "Name");
 
-            db.Roles.Find(new
-            {
-                Id = 0
-            }).;
-
             return View();
         }
 
@@ -163,7 +158,7 @@ namespace Rails.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, model.Role);
+                    await UserManager.AddToRoleAsync(user.Id, model.Name);
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
