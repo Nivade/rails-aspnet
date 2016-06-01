@@ -9,7 +9,6 @@ namespace Rails.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-
         public string Name { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -43,13 +42,13 @@ namespace Rails.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.HasDefaultSchema("DBI346087"); // Use uppercase!
+            modelBuilder.HasDefaultSchema("DBI346087");
 
-            modelBuilder.Entity<ApplicationUser>().ToTable("AspNetUsers");
-            modelBuilder.Entity<IdentityRole>().ToTable("AspNetRoles");
-            modelBuilder.Entity<IdentityUserRole>().ToTable("AspNetUserRoles");
-            modelBuilder.Entity<IdentityUserClaim>().ToTable("AspNetUserClaims");
-            modelBuilder.Entity<IdentityUserLogin>().ToTable("AspNetUserLogins");
+            modelBuilder.Entity<ApplicationUser>().ToTable("AspNetUsers", "DBI346087");
+            modelBuilder.Entity<IdentityRole>().ToTable("AspNetRoles", "DBI346087");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("AspNetUserRoles", "DBI346087");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("AspNetUserClaims", "DBI346087");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("AspNetUserLogins", "DBI346087");
         }
 
     }
