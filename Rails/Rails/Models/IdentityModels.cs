@@ -21,7 +21,7 @@ namespace Rails.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("OracleDbContext", throwIfV1Schema: false)
         {
         }
 
@@ -29,5 +29,25 @@ namespace Rails.Models
         {
             return new ApplicationDbContext();
         }
+
+
+
+        /// <summary>
+        /// Maps table names, and sets up relationships between the various user entities
+        /// </summary>
+        /// <param name="modelBuilder"/>
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.HasDefaultSchema("DBI346087"); // Use uppercase!
+
+            modelBuilder.Entity<ApplicationUser>().ToTable("AspNetUsers");
+            modelBuilder.Entity<IdentityRole>().ToTable("AspNetRoles");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("AspNetUserRoles");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("AspNetUserClaims");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("AspNetUserLogins");
+        }
+
     }
 }
