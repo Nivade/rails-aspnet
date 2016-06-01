@@ -82,8 +82,8 @@ namespace Rails.Models
         public string PhoneNumber { get; set; }
 
         
-        [Display(Name = "Occupation")]
-        public string Role { get; set; }
+        [Display(Name = "Role")]
+        public string Text { get; set; }
 
         [Required]
         [Display(Name = "Bank Account Number")]

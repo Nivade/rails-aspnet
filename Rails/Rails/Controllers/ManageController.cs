@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Rails.Models;
@@ -172,7 +174,20 @@ namespace Rails.Controllers
         // GET: /Manage/All
         public ActionResult All()
         {
-            var users = db.Users.ToList();
+            List<EditUserViewModel> users = new List<EditUserViewModel>();
+            foreach (var user in db.Users.ToList())
+            {
+                var n = new EditUserViewModel
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Role = db.Roles.Find(user.Roles.First().RoleId)
+                };
+                users.Add(n);
+            } 
 
             return View(users);
         }

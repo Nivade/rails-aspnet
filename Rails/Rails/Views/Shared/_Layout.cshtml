@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@using Microsoft.AspNet.Identity.Owin
+@using Rails.Models
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -24,6 +28,13 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @{
+                        if (User.IsInRole("Beheerder"))
+                        {
+                            <li>@Html.ActionLink("Users", "All", "Manage")</li>
+                        }
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

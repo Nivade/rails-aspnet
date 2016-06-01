@@ -1,109 +1,46 @@
-﻿@model IEnumerable<Rails.Models.ApplicationUser>
+﻿@model IEnumerable<Rails.Models.EditUserViewModel>
 
 @{
     ViewBag.Title = "All Users";
 }
 
-<h2>All</h2>
+<h2>Here you will find every registered Rails user account.</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Register", "Account", new { signin = false })
 </p>
-<div class="row">
-    <div class="col-md-10">
-        @Html.DisplayNameFor(model => model.FirstName)
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h2>@Html.DisplayNameFor(model => model.Name)</h2>
+        </div>
+        <div class="col-md-3">
+            <h2>@Html.DisplayNameFor(model => model.Email)</h2>
+        </div>
+        <div class="col-md-3">
+            <h2>@Html.DisplayNameFor(model => model.Role)</h2>
+        </div>
     </div>
-    <div class="col-md-10">
-        @Html.DisplayNameFor(model => model.LastName)
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            
+            <div class="col-md-3">
+                @Html.DisplayFor(modelItem => item.Name)
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayFor(modelItem => item.Email)
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayFor(modelItem => item.Role.Name)
+            </div>
+            <div>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </div>
+        }
     </div>
-    <div class="col-md-10">
-        @Html.DisplayNameFor(model => model.Iban)
-    </div>
-    <div class="col-md-10">
-        @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="col-md-10">
-        @Html.DisplayNameFor(model => model.EmailConfirmed)
-    </div>
-    <div class="col-md-10">
-        @Html.DisplayNameFor(model => model.PasswordHash)
-    </div>
-    <div class="col-md-10">
-        @Html.DisplayNameFor(model => model.SecurityStamp)
-    </div>
-    <div class="col-md-10">
-        @Html.DisplayNameFor(model => model.PhoneNumber)
-    </div>
-    <div class="col-md-10">
-        @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-    </div>
-    <div class="col-md-10">
-        @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-    </div>
-    <div>
-        @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-    </div>
-    <div>
-        @Html.DisplayNameFor(model => model.LockoutEnabled)
-    </div>
-    <div>
-        @Html.DisplayNameFor(model => model.AccessFailedCount)
-    </div>
-    <div>
-        @Html.DisplayNameFor(model => model.UserName)
-    </div>
+
 </div>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Iban)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmailConfirmed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PasswordHash)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecurityStamp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LockoutEnabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccessFailedCount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>

@@ -274,6 +274,7 @@
     <Content Include="Views\Account\EditAccount.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\All.cshtml" />
+    <Content Include="Views\Shared\_RoleNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -6,9 +7,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Rails.Models;
+using static System.Security.Claims.ClaimTypes;
+
 
 namespace Rails.Controllers
 {
@@ -139,8 +143,11 @@ namespace Rails.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            
-            ViewBag.Name = new SelectList(db.Roles.ToList(), "Name", "Name");
+            List<SelectListItem> roles = new List<SelectListItem>();
+            foreach (var role in db.Roles.ToList())
+                roles.Add(new SelectListItem { Text = role.Name, Value = role.Name, Selected = true});
+
+            ViewBag.Roles = roles;
 
             return View();
         }
@@ -162,18 +169,19 @@ namespace Rails.Controllers
                     LastName = model.LastName,
                     Email = model.Email,
                     Iban = model.Iban,
-
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, model.Role);
+                    await UserManager.AddToRoleAsync(user.Id, model.Text);
 
                     if (signin)
                         await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
+                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
