@@ -262,7 +262,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Permission\Create.cshtml" />
     <Content Include="Views\Permission\Delete.cshtml" />
-    <Content Include="Views\Permission\Details.cshtml" />
     <Content Include="Views\Permission\Edit.cshtml" />
     <Content Include="Views\Permission\Index.cshtml" />
     <Content Include="Views\RolePermission\Create.cshtml" />
@@ -272,9 +271,14 @@
     <Content Include="Views\RolePermission\Index.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Account\EditAccount.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Manage\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Filters\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

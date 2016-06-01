@@ -1,10 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 
 namespace Rails.Models
 {
+
+    public class EditUserViewModel
+    {
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Iban { get; set; }
+        public string Password { get; set; }
+
+    }
+
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

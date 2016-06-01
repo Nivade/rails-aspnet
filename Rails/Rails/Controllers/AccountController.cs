@@ -12,7 +12,6 @@ using Rails.Models;
 
 namespace Rails.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -140,6 +139,7 @@ namespace Rails.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            
             ViewBag.Name = new SelectList(db.Roles.ToList(), "Name", "Name");
 
             return View();
@@ -150,17 +150,29 @@ namespace Rails.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, bool signin = true)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName};
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    Iban = model.Iban,
+
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, model.Name);
+                    await UserManager.AddToRoleAsync(user.Id, model.Role);
 
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    if (signin)
+                        await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

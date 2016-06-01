@@ -67,24 +67,30 @@ namespace Rails.Models
     public class RegisterViewModel
     {
 
-        [Required]
+        [Required(ErrorMessage = "We require your first name.")]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "We require your last name.")]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Your must provide a Phone Number")]
-        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "A valid phone number is required.")]
+        [Display(Name = "Phone")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         public string PhoneNumber { get; set; }
 
-
-        public string Name { get; set; }
+        
+        [Display(Name = "Occupation")]
+        public string Role { get; set; }
 
         [Required]
+        [Display(Name = "Bank Account Number")]
+        [RegularExpression(@"[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}", ErrorMessage = "That is not a valid IBAN account.")]
+        public string Iban { get; set; }
+
+        [Required(ErrorMessage = "We require you email address.")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

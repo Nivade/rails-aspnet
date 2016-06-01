@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -10,15 +12,103 @@ using Rails.Models;
 
 namespace Rails.Controllers
 {
-    [Authorize]
+    
     public class ManageController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public ManageController()
         {
         }
+
+
+
+        [Authorize(Roles = "Beheerder")]
+        // GET: Manage/Edit/5
+        public ActionResult Edit(string id)
+        {
+            if (id == string.Empty)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ApplicationUser user = UserManager.FindById(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var roles = user.Roles;
+
+            return View(user);
+        }
+
+
+
+        // POST: Manage/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(user);
+        }
+
+
+
+        [Authorize(Roles = "Beheerder")]
+        // GET: Permission/Delete/5
+        public ActionResult Delete(string id)
+        {
+            if (id == string.Empty)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = UserManager.FindById(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+
+
+        [Authorize(Roles = "Beheerder")]
+        // POST: Manage/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            ApplicationUser user = UserManager.FindById(id);
+
+            db.Users.Remove(user);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
+
+        [Authorize(Roles = "Beheerder")]
+        // GET: Manage/Create
+        public ActionResult Create()
+        {
+            return RedirectToAction("Register", "Account", new {
+                signin = false });
+        }
+
+
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
@@ -50,6 +140,8 @@ namespace Rails.Controllers
             }
         }
 
+
+
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -72,8 +164,19 @@ namespace Rails.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
             return View(model);
         }
+
+        //
+        // GET: /Manage/All
+        public ActionResult All()
+        {
+            var users = db.Users.ToList();
+
+            return View(users);
+        }
+
 
         //
         // POST: /Manage/RemoveLogin

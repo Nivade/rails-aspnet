@@ -11,19 +11,14 @@ namespace Rails.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [Required]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
-
-        [Required]
+        
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Your must provide a PhoneNumber")]
-        [Display(Name = "Home Phone")]
-        [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
-        public override string PhoneNumber { get; set; }
+        [Display(Name = "Bank Account Number")]
+        public string Iban { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -37,8 +32,6 @@ namespace Rails.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         
-
-
         public ApplicationDbContext()
             : base("OracleDbContext", throwIfV1Schema: false)
         {
@@ -63,15 +56,18 @@ namespace Rails.Models
             modelBuilder.HasDefaultSchema("DBI346087");
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
+            
             modelBuilder.Entity<ApplicationUser>().ToTable("User", "DBI346087");
             modelBuilder.Entity<IdentityRole>().ToTable("Role", "DBI346087");
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole", "DBI346087");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim", "DBI346087");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin", "DBI346087");
+
+            
         }
 
         public DbSet<Permission> Permissions { get; set; }
+
 
         public System.Data.Entity.DbSet<Rails.Models.RolePermission> RolePermissions { get; set; }
     }

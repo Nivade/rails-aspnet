@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace Rails.Controllers
 {
     
-
+    [Authorize]
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

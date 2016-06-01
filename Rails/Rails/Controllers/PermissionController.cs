@@ -10,6 +10,7 @@ using Rails.Models;
 
 namespace Rails.Controllers
 {
+    [Authorize(Roles = "Beheerder")]
     public class PermissionController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,21 +19,6 @@ namespace Rails.Controllers
         public ActionResult Index()
         {
             return View(db.Permissions.ToList());
-        }
-
-        // GET: Permission/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Permission permission = db.Permissions.Find(id);
-            if (permission == null)
-            {
-                return HttpNotFound();
-            }
-            return View(permission);
         }
 
         // GET: Permission/Create
