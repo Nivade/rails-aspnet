@@ -190,6 +190,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Depot.cs" />
+    <Compile Include="Models\DepotPanelModels.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -298,6 +299,7 @@
     <Content Include="Views\Tram\Details.cshtml" />
     <Content Include="Views\Tram\Edit.cshtml" />
     <Content Include="Views\Tram\Index.cshtml" />
+    <Content Include="Views\Depot\Panel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

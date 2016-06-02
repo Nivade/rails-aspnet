@@ -1,0 +1,26 @@
+﻿@using Rails.Models
+@model Rails.Models.PanelData
+
+@{
+    ViewBag.Title = "Panel";
+}
+
+<h2>Panel</h2>
+<div class="container">
+    <p>Trams: @Model.Trams.Count</p>
+    <p>Tracks: @Model.Tracks.Count</p>
+
+    <div class="row">
+    @foreach (Track track in Model.TrackSectors.Keys)
+    {
+        
+        <div class="col-md-10">
+        @foreach (Sector s in Model.TrackSectors[track])
+        {
+            <p>@Html.DisplayText(s.Id.ToString())</p>
+        }
+        </div>
+    }
+    </div>
+</div>
+

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Rails.Models;
 
 namespace Rails.Controllers
@@ -115,6 +116,28 @@ namespace Rails.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+
+        //
+        // GET: Depot/Panel
+        public async Task<ActionResult> Panel()
+        {
+            PanelData data = new PanelData();
+
+            data.Tracks = await db.Tracks.ToListAsync();
+
+            data.Trams = await db.Trams.ToListAsync();
+
+            data.TrackSectors = new Dictionary<int, List<Sector>>();
+
+            foreach (Track t in data.Tracks)
+            {
+                data.TrackSectors[t.Id] = db.Sectors.Where(s => s.TrackId == t.Id).ToList();
+            }
+
+            return View(data);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
