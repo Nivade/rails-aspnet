@@ -196,6 +196,7 @@
     <Compile Include="Models\Sector.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Models\Tram.cs" />
+    <Compile Include="Models\TramType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
