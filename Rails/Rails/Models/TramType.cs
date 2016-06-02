@@ -8,5 +8,6 @@ namespace Rails.Models
 {
     public class TramType
     {
+
     }
 }
