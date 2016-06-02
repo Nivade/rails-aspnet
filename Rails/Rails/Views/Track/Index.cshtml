@@ -35,7 +35,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DepotId)
+            @Html.ActionLink(item.Depot.Name, "Details", "Depot", new {id = item.DepotId}, null) 
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Number)
@@ -48,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.InOutTrack)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sectors)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
