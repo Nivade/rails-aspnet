@@ -177,6 +177,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DepotController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
@@ -288,6 +289,11 @@
     <Content Include="Views\Track\Details.cshtml" />
     <Content Include="Views\Track\Edit.cshtml" />
     <Content Include="Views\Track\Index.cshtml" />
+    <Content Include="Views\Depot\Create.cshtml" />
+    <Content Include="Views\Depot\Delete.cshtml" />
+    <Content Include="Views\Depot\Details.cshtml" />
+    <Content Include="Views\Depot\Edit.cshtml" />
+    <Content Include="Views\Depot\Index.cshtml" />
     <None Include="Views\Tram\Index.cshtml" />
     <Content Include="Views\Tram\List.cshtml" />
   </ItemGroup>
