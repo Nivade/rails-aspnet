@@ -192,6 +192,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RolePermission.cs" />
+    <Compile Include="Models\Sector.cs" />
+    <Compile Include="Models\Track.cs" />
     <Compile Include="Models\Tram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
