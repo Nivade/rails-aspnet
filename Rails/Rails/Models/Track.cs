@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -14,6 +15,7 @@ namespace Rails.Models
         public int Accessible { get; set; }
         public int InOutTrack { get; set; }
 
+        [ForeignKey("DepotId")]
         public virtual Depot Depot { get; set; }
 
         public int? DepotId { get; set; }
