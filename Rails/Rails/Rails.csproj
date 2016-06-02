@@ -283,7 +283,6 @@
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\All.cshtml" />
     <Content Include="Views\Shared\_RoleNavigation.cshtml" />
-    <Content Include="Views\Tram\Details.cshtml" />
     <Content Include="Views\Track\Create.cshtml" />
     <Content Include="Views\Track\Delete.cshtml" />
     <Content Include="Views\Track\Details.cshtml" />
@@ -294,8 +293,11 @@
     <Content Include="Views\Depot\Details.cshtml" />
     <Content Include="Views\Depot\Edit.cshtml" />
     <Content Include="Views\Depot\Index.cshtml" />
-    <None Include="Views\Tram\Index.cshtml" />
-    <Content Include="Views\Tram\List.cshtml" />
+    <Content Include="Views\Tram\Create.cshtml" />
+    <Content Include="Views\Tram\Delete.cshtml" />
+    <Content Include="Views\Tram\Details.cshtml" />
+    <Content Include="Views\Tram\Edit.cshtml" />
+    <Content Include="Views\Tram\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

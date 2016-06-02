@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Ajax.Utilities;
 using Rails.Models;
-
 
 namespace Rails.Controllers
 {
@@ -13,88 +15,123 @@ namespace Rails.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        [Authorize(Roles = ("Wagenparkbeheerder, Beheerder"))]
         // GET: Tram
-        public ActionResult List()
+        public async Task<ActionResult> Index()
         {
-            return View(db.Trams.ToList());
+            var trams = db.Trams.Include(t => t.Depot).Include(t => t.TramType);
+            return View(await trams.ToListAsync());
         }
 
-
         // GET: Tram/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int? id)
         {
-            Tram tram = db.Trams.Find(id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Tram tram = await db.Trams.FindAsync(id);
             if (tram == null)
-                return new HttpStatusCodeResult(404);
-
+            {
+                return HttpNotFound();
+            }
             return View(tram);
         }
 
         // GET: Tram/Create
         public ActionResult Create()
         {
+            ViewBag.DepotId = new SelectList(db.Depots, "Id", "Name");
+            ViewBag.TramTypeId = new SelectList(db.TramTypes, "Id", "Description");
             return View();
         }
 
         // POST: Tram/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create([Bind(Include = "Id,Number,Length,Condition,Dirty,Broken,DriverQualified,Available,DepotId,TramTypeId")] Tram tram)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                db.Trams.Add(tram);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            ViewBag.DepotId = new SelectList(db.Depots, "Id", "Name", tram.DepotId);
+            ViewBag.TramTypeId = new SelectList(db.TramTypes, "Id", "Description", tram.TramTypeId);
+            return View(tram);
         }
 
         // GET: Tram/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Tram tram = await db.Trams.FindAsync(id);
+            if (tram == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.DepotId = new SelectList(db.Depots, "Id", "Name", tram.DepotId);
+            ViewBag.TramTypeId = new SelectList(db.TramTypes, "Id", "Description", tram.TramTypeId);
+            return View(tram);
         }
 
         // POST: Tram/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Number,Length,Condition,Dirty,Broken,DriverQualified,Available,DepotId,TramTypeId")] Tram tram)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(tram).State = EntityState.Modified;
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            ViewBag.DepotId = new SelectList(db.Depots, "Id", "Name", tram.DepotId);
+            ViewBag.TramTypeId = new SelectList(db.TramTypes, "Id", "Description", tram.TramTypeId);
+            return View(tram);
         }
 
         // GET: Tram/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Tram tram = await db.Trams.FindAsync(id);
+            if (tram == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tram);
         }
 
         // POST: Tram/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            Tram tram = await db.Trams.FindAsync(id);
+            db.Trams.Remove(tram);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }
