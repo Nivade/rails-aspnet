@@ -182,6 +182,7 @@
     <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\RolePermissionController.cs" />
+    <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Controllers\TramController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -281,6 +282,11 @@
     <Content Include="Views\Manage\All.cshtml" />
     <Content Include="Views\Shared\_RoleNavigation.cshtml" />
     <Content Include="Views\Tram\Details.cshtml" />
+    <Content Include="Views\Track\Create.cshtml" />
+    <Content Include="Views\Track\Delete.cshtml" />
+    <Content Include="Views\Track\Details.cshtml" />
+    <Content Include="Views\Track\Edit.cshtml" />
+    <Content Include="Views\Track\Index.cshtml" />
     <None Include="Views\Tram\Index.cshtml" />
     <Content Include="Views\Tram\List.cshtml" />
   </ItemGroup>
