@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,9 @@ namespace Rails.Models
         public int DriverQualified { get; set; }
         public int Available { get; set; }
 
+        [ForeignKey("DepotId")]
         public virtual Depot Depot { get; set; }
+        [ForeignKey("TramTypeId")]
         public virtual TramType TramType { get; set; }
         public virtual Sector Sector { get; set; }
 
