@@ -183,6 +183,7 @@
     <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\RolePermissionController.cs" />
+    <Compile Include="Controllers\SectorController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Controllers\TramController.cs" />
     <Compile Include="Global.asax.cs">
@@ -300,6 +301,11 @@
     <Content Include="Views\Tram\Edit.cshtml" />
     <Content Include="Views\Tram\Index.cshtml" />
     <Content Include="Views\Depot\Panel.cshtml" />
+    <Content Include="Views\Sector\Create.cshtml" />
+    <Content Include="Views\Sector\Delete.cshtml" />
+    <Content Include="Views\Sector\Details.cshtml" />
+    <Content Include="Views\Sector\Edit.cshtml" />
+    <Content Include="Views\Sector\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

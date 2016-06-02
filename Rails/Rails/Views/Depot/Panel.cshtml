@@ -11,14 +11,12 @@
     <p>Tracks: @Model.Tracks.Count</p>
 
     <div class="row">
-    @foreach (Track track in Model.TrackSectors.Keys)
+    @foreach (Track track in Model.Tracks)
     {
-        
+
         <div class="col-md-10">
-        @foreach (Sector s in Model.TrackSectors[track])
-        {
-            <p>@Html.DisplayText(s.Id.ToString())</p>
-        }
+            <h3>@Html.DisplayText(track.Number.ToString())</h3>
+            
         </div>
     }
     </div>
