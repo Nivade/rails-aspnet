@@ -24,7 +24,6 @@ namespace Rails.Models
         public virtual Depot Depot { get; set; }
         [ForeignKey("TramTypeId")]
         public virtual TramType TramType { get; set; }
-        public virtual Sector Sector { get; set; }
 
         public int? DepotId { get; set; }
         public int? TramTypeId { get; set; }
