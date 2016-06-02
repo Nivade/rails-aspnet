@@ -187,6 +187,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Depot.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -277,6 +278,7 @@
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\All.cshtml" />
     <Content Include="Views\Shared\_RoleNavigation.cshtml" />
+    <Content Include="Views\Tram\Details.cshtml" />
     <None Include="Views\Tram\Index.cshtml" />
     <Content Include="Views\Tram\List.cshtml" />
   </ItemGroup>
