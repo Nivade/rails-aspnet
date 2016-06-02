@@ -12,9 +12,17 @@ namespace Rails.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [Display(Name = "Yearly Full Maintenance Routines")]
         public int FullMaintenanceRoutines { get; set; }
+
+        [Display(Name = "Yearly Quick Maintenance Routines")]
         public int QuickMaintenanceRoutines { get; set; }
+
+        [Display(Name = "Yearly Full Cleaning Routines")]
         public int FullCleanRoutines { get; set; }
+
+        [Display(Name = "Yearly Quick Cleaning Routines")]
         public int QuickCleanRoutines { get; set; }
     }
 }
