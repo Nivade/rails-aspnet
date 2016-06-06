@@ -20,12 +20,18 @@ namespace Rails.Models
         public int DriverQualified { get; set; }
         public int Available { get; set; }
 
-        [ForeignKey("DepotId")]
+
+        public int? TramTypeId { get; set; }
+        public int? DepotId { get; set; }
+
         public virtual Depot Depot { get; set; }
+
         [ForeignKey("TramTypeId")]
         public virtual TramType TramType { get; set; }
 
-        public int? DepotId { get; set; }
-        public int? TramTypeId { get; set; }
+        [InverseProperty("Tram")]
+        public virtual ICollection<Sector> Sectors { get; set; } 
+        
+        
     }
 }

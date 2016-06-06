@@ -18,6 +18,8 @@ namespace Rails.Controllers
         public ActionResult Index()
         {
             var sectors = db.Sectors.Include(s => s.Track).Include(s => s.Tram);
+
+            var a = db.Trams.Include(t => t.Depot).Include(t => t.TramType).Include(t => t.Sectors).ToList();
             return View(sectors.ToList());
         }
 
@@ -40,7 +42,7 @@ namespace Rails.Controllers
         public ActionResult Create()
         {
             ViewBag.TrackId = new SelectList(db.Tracks, "Id", "Id");
-            ViewBag.TramId = new SelectList(db.Trams, "Id", "Condition");
+            ViewBag.TramId = new SelectList(db.Trams, "Id", "Id");
             return View();
         }
 
@@ -59,7 +61,6 @@ namespace Rails.Controllers
             }
 
             ViewBag.TrackId = new SelectList(db.Tracks, "Id", "Id", sector.TrackId);
-            ViewBag.TramId = new SelectList(db.Trams, "Id", "Condition", sector.TramId);
             return View(sector);
         }
 
@@ -76,7 +77,6 @@ namespace Rails.Controllers
                 return HttpNotFound();
             }
             ViewBag.TrackId = new SelectList(db.Tracks, "Id", "Id", sector.TrackId);
-            ViewBag.TramId = new SelectList(db.Trams, "Id", "Condition", sector.TramId);
             return View(sector);
         }
 
@@ -94,7 +94,6 @@ namespace Rails.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TrackId = new SelectList(db.Tracks, "Id", "Id", sector.TrackId);
-            ViewBag.TramId = new SelectList(db.Trams, "Id", "Condition", sector.TramId);
             return View(sector);
         }
 

@@ -15,12 +15,15 @@ namespace Rails.Models
         public int Accessible { get; set; }
         public int Blocked { get; set; }
 
+        
         [ForeignKey("TrackId")]
         public virtual Track Track { get; set; }
-        [ForeignKey("TramId")]
-        public virtual Tram Tram { get; set; }
 
-        public int? TramId { get; set; }
+        
+        public virtual Tram Tram { get; set; }
+        
         public int? TrackId { get; set; }
+        public int? TramId { get; set; }
+        
     }
 }

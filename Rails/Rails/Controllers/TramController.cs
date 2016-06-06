@@ -58,8 +58,7 @@ namespace Rails.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.DepotId = new SelectList(db.Depots, "Id", "Name", tram.DepotId);
+            
             ViewBag.TramTypeId = new SelectList(db.TramTypes, "Id", "Description", tram.TramTypeId);
             return View(tram);
         }
@@ -76,7 +75,8 @@ namespace Rails.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DepotId = new SelectList(db.Depots, "Id", "Name", tram.DepotId);
+
+
             ViewBag.TramTypeId = new SelectList(db.TramTypes, "Id", "Description", tram.TramTypeId);
             return View(tram);
         }
@@ -94,7 +94,7 @@ namespace Rails.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.DepotId = new SelectList(db.Depots, "Id", "Name", tram.DepotId);
+
             ViewBag.TramTypeId = new SelectList(db.TramTypes, "Id", "Description", tram.TramTypeId);
             return View(tram);
         }
