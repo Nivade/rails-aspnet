@@ -190,6 +190,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Binders\TrackBinder.cs" />
     <Compile Include="Models\Depot.cs" />
     <Compile Include="Models\DepotPanelModels.cs" />
     <Compile Include="Models\Permission.cs" />
@@ -306,6 +307,7 @@
     <Content Include="Views\Sector\Details.cshtml" />
     <Content Include="Views\Sector\Edit.cshtml" />
     <Content Include="Views\Sector\Index.cshtml" />
+    <Content Include="Views\Sector\_SectorList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

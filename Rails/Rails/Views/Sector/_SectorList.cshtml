@@ -1,0 +1,49 @@
+﻿@using Rails.Models
+@model IEnumerable<Rails.Models.SectorViewModel>
+
+@functions
+{
+
+    string GetSectorStateCssClasses(SectorViewModel m)
+    {
+        string state = string.Empty;
+        if (m.Blocked)
+        {
+            if (m.Sector.Tram != null)
+                state += "occupied ";
+            else
+                state += "blocked ";
+        }
+        else
+        {
+            state += "free ";
+        }
+        return state;
+    }
+
+
+}
+@helper Print(SectorViewModel m)
+{
+    if (!m.Blocked)
+    {
+            <p class="free">Free</p>
+    }
+    else if (m.Blocked && m.Sector.Tram != null)
+    {
+            <p class="occupied">@m.Sector.Tram.Number</p>
+    }
+    else
+    {
+            <p class="blocked">X</p>
+    }
+}
+
+@foreach (SectorViewModel m in Model)
+{
+    <div class="col-xs-1 col-sm-1">
+        <div class="sector-button">
+            @Print(m)
+        </div>
+    </div>
+}

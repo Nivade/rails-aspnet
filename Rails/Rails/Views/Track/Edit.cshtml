@@ -1,7 +1,12 @@
-﻿@model Rails.Models.Track
+﻿@using System.Collections
+@using System.Web.Mvc.Html
+@using Rails.Models
+@using WebGrease.Css.Extensions
+@model Rails.Models.TrackEditViewModel
 
 @{
     ViewBag.Title = "Edit";
+    var db = new ApplicationDbContext();
 }
 
 <h2>Edit</h2>
@@ -15,21 +20,14 @@
         <h4>Track</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.DepotId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DepotId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.DepotId, new SelectList(Model.Depots, "Id", "Name", Model.DepotId), new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DepotId, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @foreach (var s in Model.Sectors)
-        {
-            <p>sector</p>
-        }
-        
 
         <div class="form-group">
             @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -50,7 +48,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Accessible, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Accessible, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.CheckBoxFor(model => model.Accessible, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Accessible, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,10 +56,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.InOutTrack, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.InOutTrack, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.CheckBoxFor(model => model.InOutTrack, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.InOutTrack, "", new { @class = "text-danger" })
             </div>
         </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

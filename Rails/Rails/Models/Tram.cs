@@ -34,4 +34,13 @@ namespace Rails.Models
         
         
     }
+
+
+
+    public class TramViewModel
+    {
+
+        public Tram Tram { get; set; }
+
+    }
 }

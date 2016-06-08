@@ -25,4 +25,13 @@ namespace Rails.Models
         [Display(Name = "Yearly Quick Cleaning Routines")]
         public int QuickCleanRoutines { get; set; }
     }
+
+
+
+    public class DepotViewModel
+    {
+
+        public Depot Depot { get; set; }
+
+    }
 }

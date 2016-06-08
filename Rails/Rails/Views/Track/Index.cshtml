@@ -1,7 +1,11 @@
-﻿@model IEnumerable<Rails.Models.Track>
+﻿@using Rails.Models
+@model IEnumerable<Rails.Models.TrackViewModel>
 
 @{
     ViewBag.Title = "Index";
+    string column = "col-xs-2 col-sm-2";
+    string scolumn = "col-xs-2 col-sm-2";
+    var db = new ApplicationDbContext();
 }
 
 <h2>Index</h2>
@@ -9,55 +13,61 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Depot)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Length)
-        </th>
-        <th>
+
+
+<div class="container-fluid">
+    <div class="row track-row track-row-heading">
+        <div class="@column">
+            @Html.DisplayNameFor(model => model.Track.Number)
+        </div>
+        <div class="@column">
+            @Html.DisplayNameFor(model => model.Track.DepotId)
+        </div>
+        <div class="@column">
+            @Html.DisplayNameFor(model => model.Track.Length)
+        </div>
+        <div class="@column">
             @Html.DisplayNameFor(model => model.Accessible)
-        </th>
-        <th>
+        </div>
+        <div class="@column">
             @Html.DisplayNameFor(model => model.InOutTrack)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sectors)
-        </th>
-        <th></th>
-    </tr>
+        </div>
+    </div>
+    <hr/>
+    @foreach (var item in Model)
+    {
+        <div class="row track-row">
+            <div class="@column">
+                @Html.DisplayFor(modelItem => item.Track.Number)
+            </div>
+            <div class="@column">
+                @Html.ActionLink(item.Depot.Depot.Name, "Details", "Depot", new
+           {
+               id = item.Depot.Depot.Id
+           }, null)
+            </div>
+            <div class="@column">
+                @Html.DisplayFor(modelItem => item.Track.Length)
+            </div>
+            <div class="@column">
+                @Html.DisplayFor(modelItem => item.Accessible)
+            </div>
+            <div class="@column">
+                @Html.DisplayFor(modelItem => item.InOutTrack)
+            </div>
+            <div class="col-xs-2 col-sm-2">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Track.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Track.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Track.Id })
+            </div>
+        </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.Depot.Name, "Details", "Depot", new {id = item.DepotId}, null) 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Length)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Accessible)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InOutTrack)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sectors)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+        <div class="row track-row">
+            <div class="@column col-xs-offset-2">
+                Sectoren:
+            </div>
+            @Html.Partial("~/Views/Sector/_SectorList.cshtml", item.Sectors)
+        </div>    
+        
+    }
+</div>

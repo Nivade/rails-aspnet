@@ -81,6 +81,7 @@ namespace Rails.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(user);
         }
 

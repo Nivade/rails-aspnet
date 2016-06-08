@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Rails.Models;
+using Rails.Models.Binders;
+
 
 namespace Rails.Controllers
 {
@@ -14,10 +17,22 @@ namespace Rails.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+
+        public TrackViewModel GetViewModel(Track from)
+        {
+            return new TrackViewModel
+            {
+                Track = from,
+                Depot = new DepotViewModel { Depot = from.Depot },
+                Sectors = db.Sectors.Where(s => s.TrackId == from.Id).Select(s => new SectorViewModel { Sector = s })
+            };
+        }
+
         // GET: Track
         public ActionResult Index()
         {
-            return View(db.Tracks.ToList());
+            return View(db.Tracks.Select(GetViewModel));
         }
 
         // GET: Track/Details/5
@@ -70,7 +85,21 @@ namespace Rails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(track);
+
+
+            TrackEditViewModel model = new TrackEditViewModel
+            {
+                Accessible = Convert.ToBoolean(track.Accessible),
+                DepotId = track.DepotId,
+                Depots = db.Depots.ToList(),
+                Trams = db.Trams.ToList(),
+                Number = track.Number,
+                InOutTrack = Convert.ToBoolean(track.InOutTrack),
+                Length = track.Length,
+                Sectors = track.Sectors
+            };
+
+            return View(model);
         }
 
         // POST: Track/Edit/5
@@ -78,15 +107,25 @@ namespace Rails.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DepotId,Number,Length,Accessible,InOutTrack")] Track track)
+        public ActionResult Edit(TrackEditViewModel model)
         {
+            Track original = db.Tracks.First(x => x.Number == model.Number);
+            original.DepotId = model.DepotId;
+            original.Number = model.Number;
+            original.Length = model.Length;
+            original.Accessible = Convert.ToInt32(model.Accessible);
+            original.InOutTrack = Convert.ToInt32(model.InOutTrack);
+
+
             if (ModelState.IsValid)
             {
-                db.Entry(track).State = EntityState.Modified;
+
+                db.Entry(original).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(track);
+
+            return View(model);
         }
 
         // GET: Track/Delete/5
