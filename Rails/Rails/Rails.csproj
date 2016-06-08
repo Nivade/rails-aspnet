@@ -191,16 +191,21 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Binders\TrackBinder.cs" />
+    <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\Depot.cs" />
     <Compile Include="Models\DepotPanelModels.cs" />
+    <Compile Include="Models\Maintenance.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\RolePermission.cs" />
+    <Compile Include="Models\Route.cs" />
     <Compile Include="Models\Sector.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Models\Tram.cs" />
     <Compile Include="Models\TramType.cs" />
+    <Compile Include="Models\Transfer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
