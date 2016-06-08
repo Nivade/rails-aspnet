@@ -17,10 +17,14 @@ namespace Rails.Controllers
         // GET: Sector
         public ActionResult Index()
         {
+            List<SectorViewModel> models = new List<SectorViewModel>();
+
             var sectors = db.Sectors.Include(s => s.Track).Include(s => s.Tram);
 
-            var a = db.Trams.Include(t => t.Depot).Include(t => t.TramType).Include(t => t.Sectors).ToList();
-            return View(sectors.ToList());
+            foreach (Sector s in sectors)
+                models.Add(new SectorViewModel {Sector = s, Tram = new TramViewModel {Tram = s.Tram}});
+
+            return View(models);
         }
 
         // GET: Sector/Details/5
@@ -35,7 +39,15 @@ namespace Rails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(sector);
+            SectorViewModel model = new SectorViewModel
+            {
+                Sector = sector,
+                Tram = new TramViewModel
+                {
+                    Tram = sector.Tram
+                }
+            };
+            return View(model);
         }
 
         // GET: Sector/Create

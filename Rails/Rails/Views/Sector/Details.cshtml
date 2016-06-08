@@ -1,4 +1,4 @@
-﻿@model Rails.Models.Sector
+﻿@model Rails.Models.SectorViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,35 +11,27 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Track.Id)
+            @Html.DisplayNameFor(model => model.Sector.Track)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Track.Id)
+            @Html.DisplayFor(model => model.Sector.Track.Number)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Tram.Condition)
+            @Html.DisplayNameFor(model => model.Tram)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Tram.Condition)
+            @Html.DisplayFor(model => model.Tram.Tram.Number)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Number)
+            @Html.DisplayNameFor(model => model.Sector.Number)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Number)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Accessible)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Accessible)
+            @Html.DisplayFor(model => model.Sector.Number)
         </dd>
 
         <dt>
@@ -53,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Sector.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

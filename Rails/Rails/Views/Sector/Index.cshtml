@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Rails.Models.Sector>
+﻿@model IEnumerable<Rails.Models.SectorViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,16 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Track.Id)
+            @Html.DisplayNameFor(model => model.Sector.Track.Number)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tram.Condition)
+            @Html.DisplayNameFor(model => model.Tram)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Accessible)
+            @Html.DisplayNameFor(model => model.Sector.Number)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Blocked)
@@ -32,24 +29,21 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Track.Id)
+            @Html.DisplayFor(modelItem => item.Sector.Track.Number)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Tram.Condition)
+            @Html.DisplayFor(modelItem => item.Tram)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Accessible)
+            @Html.DisplayFor(modelItem => item.Sector.Number)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Blocked)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Sector.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Sector.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Sector.Id })
         </td>
     </tr>
 }

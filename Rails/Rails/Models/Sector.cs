@@ -41,6 +41,7 @@ namespace Rails.Models
     {
         public Sector Sector { get; set; }
 
+        [Display(Name = "Tram")]
         public TramViewModel Tram { get; set; }
 
 
