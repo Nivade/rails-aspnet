@@ -28,9 +28,6 @@ namespace Rails.Models
 
         [ForeignKey("TramTypeId")]
         public virtual TramType TramType { get; set; }
-
-        [InverseProperty("Tram")]
-        public virtual ICollection<Sector> Sectors { get; set; } 
         
         
     }
@@ -42,5 +39,9 @@ namespace Rails.Models
 
         public Tram Tram { get; set; }
 
+
+        public TramRoute Route { get; set; }
+
     }
+
 }

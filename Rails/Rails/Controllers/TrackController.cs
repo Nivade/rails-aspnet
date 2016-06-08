@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Rails.Models;
 using Rails.Models.Binders;
+using Rails.Services;
 
 
 namespace Rails.Controllers
@@ -16,23 +17,39 @@ namespace Rails.Controllers
     public class TrackController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-
-
-        public TrackViewModel GetViewModel(Track from)
-        {
-            return new TrackViewModel
-            {
-                Track = from,
-                Depot = new DepotViewModel { Depot = from.Depot },
-                Sectors = db.Sectors.Where(s => s.TrackId == from.Id).Select(s => new SectorViewModel { Sector = s })
-            };
-        }
+        
 
         // GET: Track
         public ActionResult Index()
         {
-            return View(db.Tracks.Select(GetViewModel));
+            IEnumerable<TrackViewModel> trackModels = db.Tracks.Include(t => t.Depot).Select(t => new TrackViewModel
+            {
+                Id = t.Id,
+                Depot = t.Depot,
+                Accessible = (t.Accessible == 1),
+                InOutTrack = (t.InOutTrack == 1),
+                Length = t.Length,
+                Number = t.Number
+            });
+
+            IEnumerable<SectorViewModel> sectorModels = db.Sectors.Include(s => s.TrackId).Include(s => s.TramId).Select(s => new SectorViewModel
+            {
+                Id = s.Id,
+                Accessible = s.Accessible == 1,
+                Blocked = s.Blocked == 1,
+                Number = s.Number,
+                TrackId = s.TrackId,
+                TramId = s.TramId
+            });
+
+
+            IEnumerable<TrackSectorViewModel> trackSectorViewModels = trackModels.Select(t => new TrackSectorViewModel
+            {
+                Track = t,
+                Sectors = sectorModels.Where(s => s.TrackId == t.Id)
+            });
+
+            return View(trackSectorViewModels);
         }
 
         // GET: Track/Details/5
@@ -96,10 +113,26 @@ namespace Rails.Controllers
                 Number = track.Number,
                 InOutTrack = Convert.ToBoolean(track.InOutTrack),
                 Length = track.Length,
-                Sectors = track.Sectors
+                Id = track.Id
             };
 
             return View(model);
+        }
+
+
+
+        public ActionResult AddSector(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            SectorService service = new SectorService(db);
+
+            service.Add(id.Value);
+
+            return RedirectToAction("Edit", routeValues: new { id });
         }
 
         // POST: Track/Edit/5

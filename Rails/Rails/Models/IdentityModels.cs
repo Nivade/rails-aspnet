@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -72,6 +73,12 @@ namespace Rails.Models
         public DbSet<Depot> Depots { get; set; }
         public DbSet<Track> Tracks { get; set; }
         public DbSet<Sector> Sectors { get; set; }
+        public DbSet<Connection> Connections { get; set; }
+        //public DbSet<Maintenance> Schedules { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Route> Routes { get; set; }
+        public DbSet<Transfer> Transfers { get; set; }
+        public DbSet<TramRoute> TramRoutes { get; set; }
 
 
         public System.Data.Entity.DbSet<Rails.Models.RolePermission> RolePermissions { get; set; }

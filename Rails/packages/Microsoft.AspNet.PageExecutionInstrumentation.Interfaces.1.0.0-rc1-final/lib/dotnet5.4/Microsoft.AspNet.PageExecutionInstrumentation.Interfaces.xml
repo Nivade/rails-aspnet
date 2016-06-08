@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.AspNet.PageExecutionInstrumentation.Interfaces</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.AspNet.Mvc.Razor.IBufferedTextWriter">
+            <summary>
+            Specifies the contracts for a <see cref="T:System.IO.TextWriter"/> that buffers its content.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.Mvc.Razor.IBufferedTextWriter.IsBuffering">
+            <summary>
+            Gets a flag that determines if content is currently being buffered.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.Mvc.Razor.IBufferedTextWriter.CopyTo(System.IO.TextWriter)">
+            <summary>
+            Copies the buffered content to the <paramref name="writer"/>.
+            </summary>
+            <param name="writer">The <see cref="T:System.IO.TextWriter"/> to copy the contents to.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.Mvc.Razor.IBufferedTextWriter.CopyToAsync(System.IO.TextWriter)">
+            <summary>
+            Asynchronously copies the buffered content to the <paramref name="writer"/>.
+            </summary>
+            <param name="writer">The <see cref="T:System.IO.TextWriter"/> to copy the contents to.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the copy operation.</returns>
+        </member>
+        <member name="T:Microsoft.AspNet.PageExecutionInstrumentation.IPageExecutionContext">
+            <summary>
+            Specifies the contracts for a execution context that instruments web page execution.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.PageExecutionInstrumentation.IPageExecutionContext.BeginContext(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Invoked at the start of a write operation.
+            </summary>
+            <param name="position">The absolute character position of the expression or text in the Razor file.</param>
+            <param name="length">The character length of the expression or text in the Razor file.</param>
+            <param name="isLiteral">A flag that indicates if the operation is for a literal text and not for a
+            language expression.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.PageExecutionInstrumentation.IPageExecutionContext.EndContext">
+            <summary>
+            Invoked at the end of a write operation.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNet.PageExecutionInstrumentation.IPageExecutionListenerFeature">
+            <summary>
+            Specifies the contracts for a HTTP feature that provides the context to instrument a web page.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.PageExecutionInstrumentation.IPageExecutionListenerFeature.DecorateWriter(System.IO.TextWriter)">
+            <summary>
+            Decorates the <see cref="T:System.IO.TextWriter"/> used by web page instances to
+            write the result to.
+            </summary>
+            <param name="writer">The output <see cref="T:System.IO.TextWriter"/> for the web page.</param>
+            <returns>A <see cref="T:System.IO.TextWriter"/> that wraps <paramref name="writer"/>.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.PageExecutionInstrumentation.IPageExecutionListenerFeature.GetContext(System.String,System.IO.TextWriter)">
+            <summary>
+            Creates a <see cref="T:Microsoft.AspNet.PageExecutionInstrumentation.IPageExecutionContext"/> for the specified <paramref name="sourceFilePath"/>.
+            </summary>
+            <param name="sourceFilePath">The path of the page.</param>
+            <param name="writer">The <see cref="T:System.IO.TextWriter"/> obtained from <see cref="M:Microsoft.AspNet.PageExecutionInstrumentation.IPageExecutionListenerFeature.DecorateWriter(System.IO.TextWriter)"/>.
+            </param>
+            <returns>The <see cref="T:Microsoft.AspNet.PageExecutionInstrumentation.IPageExecutionContext"/>.</returns>
+        </member>
+    </members>
+</doc>

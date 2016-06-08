@@ -133,5 +133,37 @@ namespace Rails.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PlaceTram([Bind(Include = "SectorId, TramId")]TramPlacementViewModel model)
+        {
+            var tram = db.Trams.Find(model.TramId);
+            if (tram == null)
+                return HttpNotFound("Tram id does not exist.");
+
+            var sector = db.Sectors.Find(model.SectorId);
+            if (sector == null)
+                return HttpNotFound("Sector id does not exist.");
+
+            var sectors = db.Sectors;
+            foreach (var s in sectors)
+            {
+                if (s.TramId == tram.Id)
+                {
+                    s.TramId = null;
+                    db.SaveChanges();
+                }
+            }
+
+            sector.TramId = tram.Id;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Track", null);
+        }
+
     }
 }

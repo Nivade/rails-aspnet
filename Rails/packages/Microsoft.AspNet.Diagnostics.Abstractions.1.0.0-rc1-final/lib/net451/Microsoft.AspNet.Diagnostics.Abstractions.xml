@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.AspNet.Diagnostics.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.AspNet.Diagnostics.IStatusCodePagesFeature">
+            <summary>
+            Represents the Status code pages feature.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.Diagnostics.IStatusCodePagesFeature.Enabled">
+            <summary>
+            Indicates if the status code middleware will handle responses.
+            </summary>
+        </member>
+    </members>
+</doc>

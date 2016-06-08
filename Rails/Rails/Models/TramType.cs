@@ -15,4 +15,21 @@ namespace Rails.Models
 
         public virtual ICollection<Tram> Trams { get; set; } 
     }
+
+
+
+    public class TramRoute
+    {
+
+        [Key]
+        public int Id { get; set; }
+
+        public virtual Tram Tram { get; set; }
+        public virtual Route Route { get; set; }
+
+        public int Bound { get; set; }
+
+        public int? TramId { get; set; }
+        public int? RouteId { get; set; }
+    }
 }

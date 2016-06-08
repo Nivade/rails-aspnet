@@ -11,33 +11,17 @@ namespace Rails.Models
     {
         [Key]
         public int Id { get; set; }
-
-        [Display(Name = "Nummer")]
         public int Number { get; set; }
-
-        [Display(Name = "Lengte")]
         public int Length { get; set; }
-
-        [Display(Name = "Beschikbaar")]
         public int Accessible { get; set; }
-
-        [Display(Name = "In-uitrij Spoor")]
         public int InOutTrack { get; set; }
 
-        [Display(Name = "Locatie")]
+
         [ForeignKey("DepotId")]
         public virtual Depot Depot { get; set; }
-
-
-        [Display(Name = "Locatie")]
+        
         public int? DepotId { get; set; }
 
-
-        [Display(Name = "Sectoren")]
-        public virtual ICollection<Sector> Sectors { get; set; }
-
-        
-        
 
     }
 
@@ -46,24 +30,38 @@ namespace Rails.Models
     public class TrackViewModel
     {
 
-        public Track Track { get; set; }
+        public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "Spoor")]
+        public int Number { get; set; }
 
 
+        [Required]
+        [Display(Name = "Lengte")]
+        public int Length { get; set; }
+
+
+        [Required]
         [Display(Name = "Beschikbaar")]
-        public bool Accessible
-        {
-            get { return Convert.ToBoolean(Track.Accessible); }
-            set { Track.Accessible = Convert.ToInt32(value); }
-        }
+        public bool Accessible { get; set; }
 
+
+        [Required]
         [Display(Name = "In-uitrij Spoor")]
-        public bool InOutTrack
-        {
-            get { return Convert.ToBoolean(Track.InOutTrack); }
-            set { Track.InOutTrack = Convert.ToInt32(value); }
-        }
+        public bool InOutTrack { get; set; }
 
-        public DepotViewModel Depot { get; set; }
+
+        public Depot Depot { get; set; }
+
+    }
+
+
+
+    public class TrackSectorViewModel
+    {
+
+        public TrackViewModel Track { get; set; }
 
         public IEnumerable<SectorViewModel> Sectors { get; set; }
 

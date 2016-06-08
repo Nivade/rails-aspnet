@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Rails.Models;
+using Rails.Services;
+
 
 namespace Rails.Controllers
 {
@@ -17,12 +19,8 @@ namespace Rails.Controllers
         // GET: Sector
         public ActionResult Index()
         {
-            List<SectorViewModel> models = new List<SectorViewModel>();
 
-            var sectors = db.Sectors.Include(s => s.Track).Include(s => s.Tram);
-
-            foreach (Sector s in sectors)
-                models.Add(new SectorViewModel {Sector = s, Tram = new TramViewModel {Tram = s.Tram}});
+            IEnumerable<SectorViewModel> models = db.Sectors.Include(s => s.Track).Include(s => s.Tram).Select(s => new SectorViewModel());
 
             return View(models);
         }
@@ -41,11 +39,7 @@ namespace Rails.Controllers
             }
             SectorViewModel model = new SectorViewModel
             {
-                Sector = sector,
-                Tram = new TramViewModel
-                {
-                    Tram = sector.Tram
-                }
+                Id = sector.Id
             };
             return View(model);
         }
@@ -65,6 +59,10 @@ namespace Rails.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Number,Accessible,Blocked,TramId,TrackId")] Sector sector)
         {
+            SectorService sectorService = new SectorService(db);
+
+            sectorService.Add(sector.TrackId.Value);
+
             if (ModelState.IsValid)
             {
                 db.Sectors.Add(sector);
@@ -74,6 +72,27 @@ namespace Rails.Controllers
 
             ViewBag.TrackId = new SelectList(db.Tracks, "Id", "Id", sector.TrackId);
             return View(sector);
+        }
+
+        // POST: Sector/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(SectorViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                SectorService sectorService = new SectorService(db);
+
+                if (model.TrackId != null)
+                    sectorService.Add(model.TrackId.Value);
+
+                return RedirectToAction("Index");
+            }
+
+            //ViewBag.TrackId = new SelectList(db.Tracks, "Id", "Id", sector.TrackId);
+            return View("d");
         }
 
         // GET: Sector/Edit/5
@@ -90,6 +109,30 @@ namespace Rails.Controllers
             }
             ViewBag.TrackId = new SelectList(db.Tracks, "Id", "Id", sector.TrackId);
             return View(sector);
+        }
+
+
+        // POST: Place/
+        public PartialViewResult Place(int? id)
+        {
+            if (id == null)
+                return PartialView("Error");
+
+            TramPlacementViewModel model = new TramPlacementViewModel
+            {
+                SectorId = id.Value,
+                Trams = db.Trams.ToList()
+
+            };
+
+            return PartialView("~/Views/Tram/_Placement.cshtml", model);
+        }
+
+
+
+        public ActionResult Block(int? id)
+        {
+            return Content("Error");
         }
 
         // POST: Sector/Edit/5
