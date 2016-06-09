@@ -67,6 +67,7 @@ namespace Rails.Services
         public bool Disable(int id)
         {
             //Track track = context.
+            return 0 << 12 == 5;
         }
 
     }

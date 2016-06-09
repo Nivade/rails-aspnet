@@ -48,6 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=5.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.0.0-beta-1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -194,15 +198,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\View\AccountViewModels.cs" />
     <Compile Include="Models\Binders\TrackBinder.cs" />
+    <Compile Include="Models\Builders\TramViewModelBuilder.cs" />
     <Compile Include="Models\Domain\Connection.cs" />
     <Compile Include="Models\Domain\Depot.cs" />
-    <Compile Include="Models\DepotPanelModels.cs" />
+    <Compile Include="Models\View\DepotPanelModels.cs" />
     <Compile Include="Models\Domain\Maintenance.cs" />
     <Compile Include="Models\Domain\Permission.cs" />
+    <Compile Include="Models\View\TramViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\View\ManageViewModels.cs" />
     <Compile Include="Models\Domain\Reservation.cs" />
     <Compile Include="Models\Domain\RolePermission.cs" />
     <Compile Include="Models\Domain\Route.cs" />

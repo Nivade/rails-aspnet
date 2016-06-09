@@ -18,6 +18,8 @@ namespace Rails.Controllers
         // GET: Tram
         public async Task<ActionResult> Index()
         {
+            
+
             var trams = db.Trams.Include(t => t.Depot).Include(t => t.TramType);
             return View(await trams.ToListAsync());
         }
