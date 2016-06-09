@@ -297,10 +297,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Permission\Create.cshtml" />
-    <Content Include="Views\Permission\Delete.cshtml" />
-    <Content Include="Views\Permission\Edit.cshtml" />
-    <Content Include="Views\Permission\Index.cshtml" />
     <Content Include="Views\RolePermission\Create.cshtml" />
     <Content Include="Views\RolePermission\Delete.cshtml" />
     <Content Include="Views\RolePermission\Details.cshtml" />
@@ -314,14 +310,8 @@
     <Content Include="Views\Shared\_RoleNavigation.cshtml" />
     <Content Include="Views\Track\Edit.cshtml" />
     <Content Include="Views\Track\Index.cshtml" />
-    <Content Include="Views\Depot\Create.cshtml" />
-    <Content Include="Views\Depot\Delete.cshtml" />
-    <Content Include="Views\Depot\Details.cshtml" />
-    <Content Include="Views\Depot\Edit.cshtml" />
-    <Content Include="Views\Depot\Index.cshtml" />
     <Content Include="Views\Tram\Settings.cshtml" />
     <Content Include="Views\Tram\Index.cshtml" />
-    <Content Include="Views\Depot\Panel.cshtml" />
     <Content Include="Views\Sector\Create.cshtml" />
     <Content Include="Views\Sector\Delete.cshtml" />
     <Content Include="Views\Sector\Details.cshtml" />
@@ -333,6 +323,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
+    <Folder Include="Views\Depot\" />
+    <Folder Include="Views\Permission\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
