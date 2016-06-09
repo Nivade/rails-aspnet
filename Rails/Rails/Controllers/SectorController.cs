@@ -118,6 +118,8 @@ namespace Rails.Controllers
             if (id == null)
                 return PartialView("Error");
 
+            TrackService service = new TrackService(db);
+
             TramPlacementViewModel model = new TramPlacementViewModel
             {
                 SectorId = id.Value,

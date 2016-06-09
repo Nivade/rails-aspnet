@@ -62,6 +62,13 @@ namespace Rails.Services
             return model;
         }
 
+
+
+        public bool Disable(int id)
+        {
+            //Track track = context.
+        }
+
     }
 
 }

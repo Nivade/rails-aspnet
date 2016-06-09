@@ -12,13 +12,17 @@ namespace Rails.Services
 
         private readonly ApplicationDbContext db;
 
-
-
         public SectorService(ApplicationDbContext context)
         {
             db = context;
         }
 
+        /// <summary>
+        /// Solidifies a connection between two seperate sectors.
+        /// </summary>
+        /// <param name="fromId"> Specifies the sector to connect from. </param>
+        /// <param name="toId"> Specifies the sector to connect to. </param>
+        /// <returns></returns>
         public bool Connect(int fromId, int toId)
         {
             Sector a = db.Sectors.Find(fromId);
@@ -47,15 +51,19 @@ namespace Rails.Services
 
 
 
+        /// <summary>
+        /// Adds a new sector to the specified track, and connects it to its siblings.
+        /// </summary>
+        /// <param name="trackId"> Specifies the track to add a new sector to. </param>
+        /// <returns></returns>
         public bool Add(int trackId)
         {
             Track track = db.Tracks.Find(trackId);
             if (track == null)
-            {
                 return false;
-            }
 
-            IEnumerable<Sector> sectors = db.Sectors.Where(x => x.TrackId == track.Id);
+
+            IEnumerable<Sector> sectorsInTrack = db.Sectors.Where(x => x.TrackId == track.Id);
 
             Sector newSector = new Sector
             {
@@ -64,9 +72,9 @@ namespace Rails.Services
                 TrackId = trackId
             };
 
-            if (sectors.Any())
+            if (sectorsInTrack.Any())
             {
-                newSector.Number = sectors.Last().Number + 1;
+                newSector.Number = sectorsInTrack.Last().Number + 1;
             }
             else
             {
@@ -77,7 +85,7 @@ namespace Rails.Services
             db.Sectors.Add(newSector);
             db.SaveChanges();
 
-            return Connect(newSector.Id, sectors.Last().Id);
+            return Connect(newSector.Id, sectorsInTrack.Last().Id);
 
 
         }
