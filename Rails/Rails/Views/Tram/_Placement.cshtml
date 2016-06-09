@@ -1,6 +1,6 @@
 ﻿@model Rails.Models.TramPlacementViewModel
 
-@using (Html.BeginForm("PlaceTram", "Tram", method: FormMethod.Post))
+@using (Html.BeginForm("Transfer", "Tram", method: FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Sector)

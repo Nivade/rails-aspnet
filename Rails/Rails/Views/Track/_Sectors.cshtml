@@ -1,5 +1,6 @@
 ﻿@using Rails.Models
-@model IEnumerable<Rails.Models.SectorViewModel>
+@using Rails.Models.View
+@model IEnumerable<Rails.Models.View.SectorViewModel>
 
 @functions
 {
@@ -76,13 +77,13 @@
                         }
 
                         <li>
-                            @Ajax.ActionLink("Plaats", "Place", "Sector", routeValues: new { id = m.Id }, ajaxOptions:
-                                new AjaxOptions
-                                {
-                                    UpdateTargetId = "place-tram-container-" + m.TrackId.Value.ToString(),
-                                    HttpMethod = "Get",
-                                    InsertionMode = InsertionMode.Replace,
-                                })
+                            @Ajax.ActionLink("Plaats", "Occupy", "Sector", routeValues: new { id = m.Id }, ajaxOptions:
+                                                                                                           new AjaxOptions
+                                                                                                           {
+                                                                                                               UpdateTargetId = "place-tram-container-" + m.TrackId.Value.ToString(),
+                                                                                                               HttpMethod = "Get",
+                                                                                                               InsertionMode = InsertionMode.Replace,
+                                                                                                           })
                         </li>
 
                         @if (IsOccupied(m))

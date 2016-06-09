@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Rails.Models;
+using Rails.Models.View;
 
 
 namespace Rails.Services

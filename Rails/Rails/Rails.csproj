@@ -186,6 +186,8 @@
     <Compile Include="App_Start\MappingConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Attributes\AuthorizeEmployment.cs" />
+    <Compile Include="Helpers\Roles.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepotController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -207,6 +209,8 @@
     <Compile Include="Models\View\DepotPanelModels.cs" />
     <Compile Include="Models\Domain\Maintenance.cs" />
     <Compile Include="Models\Domain\Permission.cs" />
+    <Compile Include="Models\View\TrackViewModels.cs" />
+    <Compile Include="Models\View\SectorViewModels.cs" />
     <Compile Include="Models\View\TramViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\View\ManageViewModels.cs" />
@@ -323,7 +327,7 @@
     <Content Include="Views\Sector\Details.cshtml" />
     <Content Include="Views\Sector\Edit.cshtml" />
     <Content Include="Views\Sector\Index.cshtml" />
-    <Content Include="Views\Sector\_SectorList.cshtml" />
+    <Content Include="Views\Track\_Sectors.cshtml" />
     <Content Include="Views\Tram\_Placement.cshtml" />
   </ItemGroup>
   <ItemGroup>

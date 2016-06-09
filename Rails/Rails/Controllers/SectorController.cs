@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Rails.Models;
+using Rails.Models.View;
 using Rails.Services;
 
 
@@ -113,14 +114,14 @@ namespace Rails.Controllers
 
 
         // POST: Place/
-        public PartialViewResult Place(int? id)
+        public PartialViewResult Occupy(int? id)
         {
             if (id == null)
                 return PartialView("Error");
 
             TrackService service = new TrackService(db);
 
-            TramPlacementViewModel model = new TramPlacementViewModel
+            TramTransferViewModel model = new TramTransferViewModel
             {
                 SectorId = id.Value,
                 Trams = db.Trams.ToList()

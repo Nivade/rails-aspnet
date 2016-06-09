@@ -5,7 +5,13 @@ using System.Web.Mvc;
 
 namespace Rails.Models.View
 {
-    
+    public class TramTransferViewModel
+    {
+        public int? TramId { get; set; }
+        public int? SectorId { get; set; }
+
+        public virtual ICollection<Tram> Trams { get; set; }
+    }
 
     public class TramSettingsViewModel
     {

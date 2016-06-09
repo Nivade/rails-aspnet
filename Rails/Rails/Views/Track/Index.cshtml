@@ -1,11 +1,10 @@
 ﻿@using Rails.Models
-@model IEnumerable<Rails.Models.TrackSectorViewModel>
+@model IEnumerable<Rails.Models.View.TrackSectorViewModel>
 
 @{
     ViewBag.Title = "Index";
     string column = "col-xs-2 col-sm-2";
     string scolumn = "col-xs-2 col-sm-2";
-    var db = new ApplicationDbContext();
 }
 
 <h2>Index</h2>
@@ -63,7 +62,7 @@
             </div>
         </div>
         
-        @Html.Partial("~/Views/Sector/_SectorList.cshtml", item.Sectors)
+        @Html.Partial("~/Views/Track/_Sectors.cshtml", item.Sectors)
         
     }
 </div>

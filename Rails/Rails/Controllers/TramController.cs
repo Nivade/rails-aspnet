@@ -7,26 +7,30 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using AutoMapper;
+using Rails.Attributes;
+using Rails.Helpers;
 using Rails.Models;
 using Rails.Models.View;
 
 
 namespace Rails.Controllers
 {
+    [Authorize]
     public class TramController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
 
         // GET: Tram
         public ActionResult Index()
         {
             var models = Mapper.Map<List<Tram>, List<TramIndexViewModel>>(db.Trams.ToList());
-
             return View(models);
         }
 
-
+        
         // GET: Tram/Settings/5
         public ActionResult Settings(int? id)
         {
@@ -53,6 +57,7 @@ namespace Rails.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeEmployment(Employment.Beheerder, Employment.WagenparkBeheerder)]
         public ActionResult Settings(TramSettingsViewModel model)
         {
             Tram tram = Mapper.Map<TramSettingsViewModel, Tram>(model);
@@ -83,7 +88,8 @@ namespace Rails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PlaceTram([Bind(Include = "SectorId, TramId")]TramPlacementViewModel model)
+        [AuthorizeEmployment(Employment.Beheerder, Employment.WagenparkBeheerder)]
+        public ActionResult Transfer([Bind(Include = "SectorId, TramId")]TramTransferViewModel model)
         {
             var tram = db.Trams.Find(model.TramId);
             if (tram == null)
@@ -108,6 +114,13 @@ namespace Rails.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index", "Track", null);
+        }
+
+
+        [AuthorizeEmployment(Roles = "Technicus")]
+        public ActionResult Update(int? id)
+        {
+            
         }
 
     }

@@ -22,6 +22,8 @@ namespace Rails
                 config.CreateMap<Tram, TramIndexViewModel>();
                 config.CreateMap<TramIndexViewModel, Tram>();
 
+                //config.CreateMap<Tram, TramTransferViewModel>().
+
             });
         }
     }

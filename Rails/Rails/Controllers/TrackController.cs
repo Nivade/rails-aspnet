@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Rails.Models;
 using Rails.Models.Binders;
+using Rails.Models.View;
 using Rails.Services;
 
 
