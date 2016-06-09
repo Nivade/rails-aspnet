@@ -103,7 +103,7 @@ namespace Rails.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Bevestig Wachtwoord")]
-        [Compare("Wachtwoord", ErrorMessage = "De wachtwoorden komen niet overeen.")]
+        [Compare("Password", ErrorMessage = "De wachtwoorden komen niet overeen.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -111,18 +111,18 @@ namespace Rails.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email Adress")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Het {0} moet ten minste {2} karakters lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Bevestig Wachtwoord")]
+        [Compare("Password", ErrorMessage = "De wachtwoorden komen niet overeen.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -132,7 +132,7 @@ namespace Rails.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email Adress")]
         public string Email { get; set; }
     }
 }
