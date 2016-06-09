@@ -192,9 +192,7 @@
     <Compile Include="Controllers\DepotController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\RolePermissionController.cs" />
     <Compile Include="Controllers\SectorController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Controllers\TramController.cs" />
