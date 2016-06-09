@@ -8,7 +8,7 @@ namespace Rails.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Email Adress")]
         public string Email { get; set; }
     }
 
@@ -35,7 +35,7 @@ namespace Rails.Models
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
+        [Display(Name = "Browser onthouden?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -44,66 +44,66 @@ namespace Rails.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Email Adress")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Email Adress")]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Onthoud mij?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
 
-        [Required(ErrorMessage = "We require your first name.")]
-        [Display(Name = "First name")]
+        [Required(ErrorMessage = "Uw voornaam is verplicht.")]
+        [Display(Name = "Voornaam")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "We require your last name.")]
-        [Display(Name = "Last name")]
+        [Required(ErrorMessage = "Uw achternaam is verplicht.")]
+        [Display(Name = "Achternaam")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "A valid phone number is required.")]
-        [Display(Name = "Phone")]
+        [Required(ErrorMessage = "Uw telefoon nummer is verplicht.")]
+        [Display(Name = "Telefoon Nr.")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Ongeldig telefoon nummer.")]
         public string PhoneNumber { get; set; }
 
         
-        [Display(Name = "Role")]
+        [Display(Name = "Functie")]
         public string Text { get; set; }
 
-        [Required]
-        [Display(Name = "Bank Account Number")]
-        [RegularExpression(@"[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}", ErrorMessage = "That is not a valid IBAN account.")]
+        [Required(ErrorMessage = "Uw IBAN nummer is verplicht.")]
+        [Display(Name = "IBAN Nummer")]
+        [RegularExpression(@"[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}", ErrorMessage = "Ongeldig IBAN nummer.")]
         public string Iban { get; set; }
 
-        [Required(ErrorMessage = "We require you email address.")]
+        [Required(ErrorMessage = "Uw email adress is verplicht.")]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email Adress")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "De {0} moet tenminste {2} karakters lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Bevestig Wachtwoord")]
+        [Compare("Wachtwoord", ErrorMessage = "De wachtwoorden komen niet overeen.")]
         public string ConfirmPassword { get; set; }
     }
 

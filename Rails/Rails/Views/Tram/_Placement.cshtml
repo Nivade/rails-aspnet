@@ -3,7 +3,7 @@
 @using (Html.BeginForm("PlaceTram", "Tram", method: FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Sector, null)
+    @Html.HiddenFor(model => model.Sector)
     @Html.HiddenFor(model => model.SectorId)
     <div class="row">
 
