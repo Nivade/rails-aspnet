@@ -1,14 +1,11 @@
-﻿@model IEnumerable<Rails.Models.TramViewModel>
+﻿@model IEnumerable<Rails.Models.View.TramIndexViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Overzicht</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -71,9 +68,7 @@
             @Html.DisplayFor(modelItem => item.Available)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Verander", "Settings", new {id = item.Id} )
         </td>
     </tr>
 }

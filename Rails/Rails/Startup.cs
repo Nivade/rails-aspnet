@@ -2,6 +2,7 @@
 using Microsoft.Owin;
 using Owin;
 using Rails.Models;
+using Rails.Models.View;
 
 [assembly: OwinStartupAttribute(typeof(Rails.Startup))]
 namespace Rails
@@ -10,7 +11,6 @@ namespace Rails
     {
         public void Configuration(IAppBuilder app)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Tram, TramViewModel>());
             ConfigureAuth(app);
         }
     }

@@ -83,3 +83,4 @@ C:\Users\Nivade\Documents\GitHub\rails-aspnet\Rails\Rails\bin\Microsoft.Owin.Sec
 C:\Users\Nivade\Documents\GitHub\rails-aspnet\Rails\Rails\obj\Debug\Rails.csprojResolveAssemblyReference.cache
 C:\Users\Nivade\Documents\GitHub\rails-aspnet\Rails\Rails\obj\Debug\Rails.dll
 C:\Users\Nivade\Documents\GitHub\rails-aspnet\Rails\Rails\obj\Debug\Rails.pdb
+C:\Users\Nivade\Documents\GitHub\rails-aspnet\Rails\Rails\bin\AutoMapper.dll

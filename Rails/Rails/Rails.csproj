@@ -183,6 +183,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MappingConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -314,10 +315,7 @@
     <Content Include="Views\Depot\Details.cshtml" />
     <Content Include="Views\Depot\Edit.cshtml" />
     <Content Include="Views\Depot\Index.cshtml" />
-    <Content Include="Views\Tram\Create.cshtml" />
-    <Content Include="Views\Tram\Delete.cshtml" />
-    <Content Include="Views\Tram\Details.cshtml" />
-    <Content Include="Views\Tram\Edit.cshtml" />
+    <Content Include="Views\Tram\Settings.cshtml" />
     <Content Include="Views\Tram\Index.cshtml" />
     <Content Include="Views\Depot\Panel.cshtml" />
     <Content Include="Views\Sector\Create.cshtml" />
@@ -355,7 +353,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4256</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4256/</IISUrl>
+          <IISUrl>http://localhost:8080/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

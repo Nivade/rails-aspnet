@@ -72,3 +72,4 @@ C:\Users\Nivade\Documents\GitHub\rails-aspnet\Rails\Rails.Tests\bin\Debug\Micros
 C:\Users\Nivade\Documents\GitHub\rails-aspnet\Rails\Rails.Tests\obj\Debug\Rails.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Nivade\Documents\GitHub\rails-aspnet\Rails\Rails.Tests\obj\Debug\Rails.Tests.dll
 C:\Users\Nivade\Documents\GitHub\rails-aspnet\Rails\Rails.Tests\obj\Debug\Rails.Tests.pdb
+C:\Users\Nivade\Documents\GitHub\rails-aspnet\Rails\Rails.Tests\bin\Debug\AutoMapper.dll
