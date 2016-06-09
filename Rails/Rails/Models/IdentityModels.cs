@@ -12,13 +12,13 @@ namespace Rails.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [Display(Name = "First name")]
+        [Display(Name = "Voornaam")]
         public string FirstName { get; set; }
         
-        [Display(Name = "Last name")]
+        [Display(Name = "Achternaam")]
         public string LastName { get; set; }
 
-        [Display(Name = "Bank Account Number")]
+        [Display(Name = "IBAN")]
         public string Iban { get; set; }
 
 
