@@ -90,15 +90,27 @@ namespace Rails.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
+            var Grant = SignInManager.AuthenticationManager.AuthenticationResponseGrant;
+
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (User.IsInRole("Schoonmaker"))
-                        return View("Index", "");
+                    if (Grant.Principal.IsInRole("Schoonmaker"))
+                    {
+                        return RedirectToAction("Index",
+                                                "Home",
+                                                new
+                                                {
+                                                    area = "Clean"
+                                                });
+                    }
+                        return RedirectToRoute("Clean_default");
                     if (User.IsInRole("Beheerder"))
+                        
                         return RedirectToAction("Index", "Home", new { area = "Remise" });
-                    if (User.IsInRole("Wagenparkbeheerder"))
-                        return RedirectToAction("Index", "Home", new { area = "Remise" });
+
+                    var u = User.Identity.Name;
 
                     return RedirectToAction("Index", "Home", new { area = "Remise" });
                 case SignInStatus.LockedOut:
