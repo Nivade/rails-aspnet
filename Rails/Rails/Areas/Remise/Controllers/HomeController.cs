@@ -13,7 +13,7 @@ using Rails.Services;
 
 namespace Rails.Areas.Remise.Controllers
 {
-    [Authorize(Roles = "Beheerder, Wagenparkbeheerder")]
+    [Authorize(Roles = "Beheerder, Wagenparkbeheerder, Bestuurder")]
     public class HomeController : Controller
     {
         private RailsDbContext context = new RailsDbContext();

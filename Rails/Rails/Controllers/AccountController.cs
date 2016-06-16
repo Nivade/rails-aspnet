@@ -94,7 +94,7 @@ namespace Rails.Controllers
             {
                 case SignInStatus.Success:
                     if (User.IsInRole("Schoonmaker"))
-                        return RedirectToAction("Index", "Home", new {area = "Clean"});
+                        return View("Index", "");
                     if (User.IsInRole("Beheerder"))
                         return RedirectToAction("Index", "Home", new { area = "Remise" });
                     if (User.IsInRole("Wagenparkbeheerder"))

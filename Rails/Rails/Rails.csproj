@@ -207,6 +207,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\TrackController.cs" />
     <Compile Include="Areas\Admin\Controllers\TramController.cs" />
+    <Compile Include="Areas\Bestuurder\BestuurderAreaRegistration.cs" />
     <Compile Include="Areas\Clean\CleanAreaRegistration.cs" />
     <Compile Include="Areas\Clean\Controllers\HomeController.cs" />
     <Compile Include="Areas\Clean\Models\MaintenanceViewModels.cs" />
@@ -227,6 +228,7 @@
     <Content Include="Areas\Admin\Views\Tram\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Tram\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Tram\Index.cshtml" />
+    <Content Include="Areas\Bestuurder\Views\web.config" />
     <None Include="Areas\Clean\Views\Home\_Queued.cshtml" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -412,6 +414,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Bestuurder\Controllers\" />
+    <Folder Include="Areas\Bestuurder\Models\" />
+    <Folder Include="Areas\Bestuurder\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
