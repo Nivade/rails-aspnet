@@ -1,0 +1,105 @@
+﻿@using Rails.Models
+@using Rails.Models.View
+@model IEnumerable<Rails.Models.View.SectorOptionsViewModel>
+
+@functions
+{
+    
+
+    string GetSectorStateCssClasses(SectorViewModel m)
+    {
+        string state = string.Empty;
+        if (m.Blocked)
+        {
+            if (m.TramId != null)
+                state += "occupied ";
+            else
+                state += "blocked ";
+        }
+        else
+        {
+            state += "free ";
+        }
+        return state;
+    }
+
+
+
+    string BlockadeActionLinkText(SectorViewModel model)
+    {
+        if (model.Blocked)
+            return "Deblokkeer";
+        else
+            return "Blokkeer";
+    }
+
+
+
+    bool IsOccupied(SectorViewModel model)
+    {
+        return model.TramId.HasValue;
+    }
+
+
+
+}
+
+<div class="row track-row">
+    <div class="col-xs-1">Sectors</div>
+    <div class="btn-group col-xs-11" role="group">
+        @if (Model.Any())
+        {
+            var db = new ApplicationDbContext();
+            foreach (SectorViewModel m in Model)
+            {
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @if (m.TramId != null)
+                        {
+                            <i>@db.Trams.Find(m.TramId).Number</i>
+                        }
+                        else if (m.Blocked)
+                        {
+                            <i>X</i>
+                        }
+                        else
+                        {
+                            <i>Free</i>
+                        }
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        @if (!IsOccupied(m))
+                        {
+                            <li>
+                                @Html.ActionLink(@BlockadeActionLinkText(m), "Block", "Sector", routeValues: new{m}, htmlAttributes: null)
+                            </li>
+                        }
+
+                        <li>
+                            @Ajax.ActionLink("Plaats", "Occupy", "Sector", routeValues: new { id = m.Id }, ajaxOptions:
+                                                                                                           new AjaxOptions
+                                                                                                           {
+                                                                                                               UpdateTargetId = "place-tram-container-" + m.TrackId.Value.ToString(),
+                                                                                                               HttpMethod = "Get",
+                                                                                                               InsertionMode = InsertionMode.Replace,
+                                                                                                           })
+                        </li>
+
+                        @if (IsOccupied(m))
+                        {
+                            <li>
+                                @Html.ActionLink("Verwijder", "Remove", "Sector", routeValues: new{m}, htmlAttributes: null)
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+             }
+        }
+    </div>
+</div>
+@if (Model.Any())
+{
+    <div id="place-tram-container-@Model.First().TrackId.ToString()"></div>
+}

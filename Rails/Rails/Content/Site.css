@@ -1,9 +1,4 @@
-﻿* {
-	margin: 0;
-	padding: 0;
-}
-
-body {
+﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -27,23 +22,15 @@ select,
 textarea {
     max-width: 280px;
 }
-.track-row-heading {
-	font-weight: 700;
+
+/* Set padding to display errors that occur during databinding */
+.padding-error {
+    padding-top: 20px;
 }
 
-hr {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.row.track-row {
-	margin: 5px 5px;
-}
-
-.sector-button {
-	width: 50px;
-	height: 25px;
-	line-height: 25px;
-	border: 1px solid rgb(55, 55, 55);
-	text-align: center;
+@media only screen and (max-width: 767px) {
+    .nofloat {
+        float: none;
+        padding: 10px 15px;
+    }
 }

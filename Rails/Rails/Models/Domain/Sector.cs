@@ -1,40 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
-namespace Rails.Models
+
+namespace Rails.Models.Domain
 {
+
+    [Table("Sector")]
     public class Sector
     {
         [Key]
         public int Id { get; set; }
-        public int Number { get; set; }
-        public int Accessible { get; set; }
-        public int Blocked { get; set; }
 
-        
+        public int Number { get; set; }
+
+        public bool Accessible { get; set; }
+
+        public bool Blocked { get; set; }
+
+        public int? TrackId { get; set; }
+
         [ForeignKey("TrackId")]
         public virtual Track Track { get; set; }
 
-
-        [Display(Name = "Tram")]
-        public virtual Tram Tram { get; set; }
-        
-        public int? TrackId { get; set; }
         public int? TramId { get; set; }
-        
+
+        public virtual Tram Tram { get; set; }
     }
 
 
+    [Table("Connection")]
+    public class Connection
+    {
+        [Key]
+        public int Id { get; set; }
 
-    
 
+        public int? SectorFromId { get; set; }
 
+        [ForeignKey("SectorFromId")]
+        public virtual Sector SectorFrom { get; set; }
 
-    
+        public int? SectorToId { get; set; }
 
+        [ForeignKey("SectorToId")]
+        public virtual Sector SectorTo { get; set; }
+
+    }
 
 }

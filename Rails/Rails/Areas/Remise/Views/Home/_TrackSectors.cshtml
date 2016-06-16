@@ -1,0 +1,93 @@
+﻿@using System.Diagnostics.Eventing.Reader
+@model IEnumerable<Rails.Areas.Remise.Models.RemiseSectorModel>
+
+
+@functions
+{
+    private int sectorDropdownCount = 0;
+
+
+    string SectorDropdownCountIdIncrement()
+    {
+        return string.Format("dropdowngroup{0}", ++sectorDropdownCount);
+    }
+
+    string SectorDropdownCountId()
+    {
+        return string.Format("dropdowngroup{0}", sectorDropdownCount);
+    }
+
+
+
+    string TramPlacementId()
+    {
+        return "tramPlacement" + ViewData["Track"];
+    }
+}
+
+
+    <div class="btn-group" role="group" aria-label="...">
+    @foreach (var item in Model)
+    {
+
+
+        <div class="btn-group" role="group">
+            <button type="button" class="btn @(item.TramInCleaning ? "btn-primary" : "btn-default") dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @if (item.Blocked)
+                {
+                    <i>X</i>
+                }
+                else if (item.Tram != null)
+                {
+                    @item.Tram.Number
+                }
+                
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                @if (!item.Blocked)
+                {
+                    <li>
+                        <a href="@Url.Action("Block", new {number = item.SectorNumber})">
+                            <i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
+                            Blokkeer
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="@Url.Action("Unblock", new {number = item.SectorNumber})">
+                            <i class="glyphicon glyphicon-ok" aria-hidden="true"></i>
+                            Deblokkeer
+                        </a>
+                    </li>
+                }
+
+                @if (item.Tram == null)
+                {
+                    <li>
+                        @Ajax.ActionLink("Plaats tram", "Placement", ajaxOptions: new AjaxOptions {UpdateTargetId = TramPlacementId(), InsertionMode = InsertionMode.Replace}, routeValues: new { sector = item.SectorNumber })
+                        
+                    </li>
+                }
+                
+                @if (item.Tram != null && !item.TramInCleaning)
+                {
+                    <li>
+                        <a href="@Url.Action("ToClean", new {tram = item.Tram.Id})">
+                            <i class="glyphicon glyphicon-tint" aria-hidden="true"></i>
+                            Naar schoonmaak
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+
+
+    }
+    </div>
+    <div id="@TramPlacementId()" class="row"></div>
+
+

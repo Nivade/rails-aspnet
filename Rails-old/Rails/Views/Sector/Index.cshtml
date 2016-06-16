@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Rails.Models.SectorViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Model.Track.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tram)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Blocked)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model.Track.Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tram)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model.Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Blocked)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Model.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Model.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Model.Id })
+        </td>
+    </tr>
+}
+
+</table>

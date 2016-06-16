@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Rails.Models.View.TramMaintenancePendingViewModel>
+
+<h3>Wachtlijst</h3>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Number)</th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+            <div id="schedule-tram-@item.Id">
+                @Ajax.ActionLink("Inplannen", "SchedulePendingPartial","Maintenance", routeValues: new { id = item.Id }, ajaxOptions:new AjaxOptions { UpdateTargetId = "schedule-tram-" + item.Id, InsertionMode = InsertionMode.Replace, HttpMethod = "Get"})
+            </div>
+        </td>
+    </tr>
+}
+</table>

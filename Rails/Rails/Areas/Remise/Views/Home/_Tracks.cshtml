@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Rails.Areas.Remise.Models.RemiseTrackModel>
+
+<h2>Sporen</h2>
+
+    
+@foreach (var item in Model)
+{
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            @Html.DisplayFor(i => item.Number)
+            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+            @Html.Action("Sectors", routeValues: new { track = item.Number })
+        </div>
+    </div>
+}
+
+

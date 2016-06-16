@@ -1,0 +1,31 @@
+﻿
+
+@{
+    ViewBag.Title = "Schoonmaak";
+}
+
+
+<h2>Schoonmaak - Overzicht</h2>
+
+<div class="container">
+    @if (ViewBag.HasTasks)
+    {
+        <div class="row">
+            @Html.Action("MyTasks")
+        </div>
+    }
+    <div class="row">
+        @Html.Action("Queued")
+    </div>
+
+    <div class="row">
+        @Html.Action("Busy")
+    </div>
+
+    <div class="row">
+        @Html.Action("Finished")
+    </div>
+</div>
+
+
+

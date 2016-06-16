@@ -1,0 +1,50 @@
+﻿@model Rails.Models.SectorViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sector</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Model.Track)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model.Track.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tram.Tram.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blocked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blocked)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

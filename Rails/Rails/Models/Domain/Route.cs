@@ -1,21 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace Rails.Models
+namespace Rails.Models.Domain
 {
 
+    [Table("Route")]
     public class Route
     {
         [Key]
         public int Id { get; set; }
 
-        public virtual Depot Depot { get; set; }
-
+        [Display(Name = "Nummer")]
         public int Number { get; set; }
 
-        public int AccompaniedByDriver { get; set; }
+        [Display(Name = "Bestuurder mee")]
+        public bool AccompaniedByDriver { get; set; }
+        
 
-        public int? DepotId { get; set; }
     }
 
 }

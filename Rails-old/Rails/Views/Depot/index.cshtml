@@ -1,0 +1,26 @@
+﻿@model Rails.Models.View.DepotTrackViewModel
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+        <div class="panel">
+            <div class="panel-heading">
+                <p>@Model.Track.Number</p>
+            </div>
+            <div class="panel-body">
+                @foreach (var sector in Model.Sectors)
+                {
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Free
+                            <span class="caret"></span>
+                        </button>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+</div>
