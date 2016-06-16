@@ -93,7 +93,14 @@ namespace Rails.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if (User.IsInRole("Schoonmaker"))
+                        return RedirectToAction("Index", "Home", new {area = "Clean"});
+                    if (User.IsInRole("Beheerder"))
+                        return RedirectToAction("Index", "Home", new { area = "Remise" });
+                    if (User.IsInRole("Wagenparkbeheerder"))
+                        return RedirectToAction("Index", "Home", new { area = "Remise" });
+
+                    return RedirectToAction("Index", "Home", new { area = "Remise" });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
