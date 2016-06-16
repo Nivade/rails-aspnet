@@ -97,20 +97,13 @@ namespace Rails.Controllers
             {
                 case SignInStatus.Success:
                     if (Grant.Principal.IsInRole("Schoonmaker"))
-                    {
-                        return RedirectToAction("Index",
-                                                "Home",
-                                                new
-                                                {
-                                                    area = "Clean"
-                                                });
-                    }
-                        return RedirectToRoute("Clean_default");
-                    if (User.IsInRole("Beheerder"))
-                        
+                        return RedirectToAction("Index", "Home", new{area = "Clean"});
+                    if (Grant.Principal.IsInRole("Beheerder"))
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    if (Grant.Principal.IsInRole("Bestuurder"))
                         return RedirectToAction("Index", "Home", new { area = "Remise" });
-
-                    var u = User.Identity.Name;
+                    if (Grant.Principal.IsInRole("Wagenparkbeheerder"))
+                        return RedirectToAction("Index", "Home", new { area = "Remise" });
 
                     return RedirectToAction("Index", "Home", new { area = "Remise" });
                 case SignInStatus.LockedOut:
